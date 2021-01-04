@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "130997",
+  "database": "Polimeet",
+  "entities": ["src/**/*.entity.ts"],
+  "synchronize": false,
+  "retryDelay": 3000,
+  "retryAttempts": 10,
+  "migrationsTableName": "migrations",
+  "migrations": ["src/database/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "src/database/migrations"
+  }
+}
