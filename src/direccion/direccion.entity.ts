@@ -1,15 +1,14 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-  OneToMany,
 } from 'typeorm';
 
 import { Colonia } from '../colonia/colonia.entity';
 import { Delegacion } from '../delegacion/delegacion.entity';
 import { Estado } from '../estado/estado.entity';
-import { Usuario } from '../usuario/usuario.entity';
 
 @Entity()
 export class Direccion {
@@ -22,15 +21,18 @@ export class Direccion {
   @Column()
   numero: number;
   
-  @ManyToOne(() => Colonia, colonia => colonia.direcciones)
+  @ManyToOne(() => Colonia)
+  @JoinColumn([{ name: 'coloniaId', referencedColumnName: 'id' }])
   colonia: Colonia;
 
-  @ManyToOne(() => Delegacion, delegacion => delegacion.direcciones)
+  @ManyToOne(() => Delegacion)
+  @JoinColumn([{ name: 'delgacionId', referencedColumnName: 'id' }])
   delegacion: Delegacion;
 
-  @ManyToOne(() => Estado, estado => estado.direcciones)
+  @ManyToOne(() => Estado)
+  @JoinColumn([{
+    name: 'idEstado',
+    referencedColumnName: 'id',
+  }])
   estado: Estado;
-  
-  @OneToMany(() => Usuario, usuario => usuario.direccion)
-  usuarios: Usuario[];
 }

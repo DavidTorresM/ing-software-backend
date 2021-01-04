@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -27,6 +28,7 @@ export class Usuario {
   @Column()
   segundoApellido: string;
   
-  @ManyToOne(() => Direccion, direccion => direccion.usuarios)
+  @ManyToOne(() => Direccion)
+  @JoinColumn([{ name: 'direccionId', referencedColumnName: 'id' }])
   direccion: Direccion;
 }

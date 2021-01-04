@@ -14,7 +14,4 @@ export class Estado {
 
   @Column()
   nombre: string;
-
-  @OneToMany(() => Direccion, direccion => direccion.estado)
-  direcciones: Direccion[];
 }

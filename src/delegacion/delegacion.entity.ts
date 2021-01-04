@@ -14,7 +14,4 @@ export class Delegacion {
 
   @Column()
   nombre: string;
-
-  @OneToMany(() => Direccion, direccion => direccion.delegacion)
-  direcciones: Direccion[];
 }
