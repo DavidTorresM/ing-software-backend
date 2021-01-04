@@ -26,15 +26,27 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Requirements
+- PostgreSQL 10
+- Node js
+
 ## Installation
 
 ```bash
+$ npm i -g @nestjs/cli
+
 $ npm install
 ```
 
 ## Running the app
 
 ```bash
+# Generate sql code for Polimeet db.
+$ npm migrations:generate migraciones
+
+# Create tables for Polimeet db.
+$ npm migrations:run
+
 # development
 $ npm run start
 
