@@ -23,7 +23,7 @@ export class Direccion {
   
   @ManyToOne(() => Colonia)
   @JoinColumn([{
-    name: 'coloniaId',
+    name: 'idColonia',
     referencedColumnName: 'id',
   }])
   colonia: Colonia;
