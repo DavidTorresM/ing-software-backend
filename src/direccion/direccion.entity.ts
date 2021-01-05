@@ -22,11 +22,17 @@ export class Direccion {
   numero: number;
   
   @ManyToOne(() => Colonia)
-  @JoinColumn([{ name: 'coloniaId', referencedColumnName: 'id' }])
+  @JoinColumn([{
+    name: 'coloniaId',
+    referencedColumnName: 'id',
+  }])
   colonia: Colonia;
 
   @ManyToOne(() => Delegacion)
-  @JoinColumn([{ name: 'delgacionId', referencedColumnName: 'id' }])
+  @JoinColumn([{
+    name: 'idDelegacion',
+    referencedColumnName: 'id',
+  }])
   delegacion: Delegacion;
 
   @ManyToOne(() => Estado)

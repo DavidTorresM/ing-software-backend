@@ -14,10 +14,10 @@ export class Curso {
   @PrimaryColumn()
   id: string;
 
-  @Column('time')
+  @Column('timestamp with time zone')
   horaInicio: Date;
 
-  @Column('time')
+  @Column('timestamp with time zone')
   horaFin: Date;
 
   @ManyToOne(() => Materia)

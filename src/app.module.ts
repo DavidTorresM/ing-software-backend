@@ -16,6 +16,7 @@ import { AlumnoController } from './alumnno/controller/alumno.controller';
 import { MateriaModule } from './materia/materia.module';
 import { CursoModule } from './curso/curso.module';
 import { SalaModule } from './sala/sala.module';
+import { MensajeModule } from './mensaje/mensaje.module';
 
 @Module({
   imports: [
@@ -42,7 +43,8 @@ import { SalaModule } from './sala/sala.module';
     AlumnoModule,
     MateriaModule,
     CursoModule,
-    SalaModule
+    SalaModule,
+    MensajeModule
   ],
   controllers: [AppController, AlumnoController],
   providers: [AppService],
