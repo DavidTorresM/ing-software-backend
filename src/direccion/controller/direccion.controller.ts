@@ -9,6 +9,7 @@ import {
 import { Direccion } from '../direccion.entity';
 import { DireccionDTO } from '../interface/direccion.interface';
 import { DireccionService } from '../service/direccion.service';
+
 @Controller('api/direccion')
 export class DireccionController {
   constructor(
@@ -22,17 +23,10 @@ export class DireccionController {
     return respuesta;
   }
   
-   @Get('buscar/:id')
+  @Get('buscar/:id')
   async obtenerDireccion(@Param('id') id: number): Promise< Direccion | null >{
     const respuesta = await this.servicioDireccion.obtenerDireccion(id);
 
     return respuesta;
   }
-/*
-  @Get('listar')
-  async obtenerDirecciones() : Promise< Colonia[] > {
-    const respuesta = await this.servicioColonia.obtenerColonias();
-
-    return respuesta;
-  } */
 }

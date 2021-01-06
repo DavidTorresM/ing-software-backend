@@ -50,4 +50,14 @@ export class Direccion {
     referencedColumnName: 'id',
   }])
   estado: Estado;
+
+  public getResponseFormat(): Direccion {
+    const response = {...this};
+
+    delete response['idColonia'];
+    delete response['idDelegacion'];
+    delete response['idEstado'];
+  
+    return response;
+  }
 }

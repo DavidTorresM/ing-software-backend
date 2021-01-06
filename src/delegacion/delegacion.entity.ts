@@ -1,16 +1,16 @@
 import {
   Column,
   Entity,
+  Index,
   PrimaryGeneratedColumn,
-  Unique,
 } from 'typeorm';
 
 @Entity()
-@Unique("nombreDelegacion", ["nombre"])
 export class Delegacion {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
+  @Index({ unique: true })
   nombre: string;
 }

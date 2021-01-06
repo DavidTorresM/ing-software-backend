@@ -24,12 +24,10 @@ export class DireccionService {
       { relations: ['colonia', 'delegacion', 'estado'], }
     );
 
-    return direccion;
+    if (!direccion) {
+      return null;
+    }
+
+    return direccion.getResponseFormat();
   }
-
-/*   async obtenerColonias(): Promise< Colonia[] > {
-    const colonias = this.repositorioColonia.find();
-
-    return colonias;
-  } */
 }

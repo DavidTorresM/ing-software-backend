@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  Index,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -10,14 +11,15 @@ import { Direccion } from '../direccion/direccion.entity';
 
 @Entity()
 export class Usuario {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
+  @Index({ unique: true })
   email: string;
   
   @Column()
-  constrasenia: string;
+  contrasenia: string;
 
   @Column()
   nombre: string;
@@ -27,8 +29,20 @@ export class Usuario {
 
   @Column()
   segundoApellido: string;
-  
-  @ManyToOne(() => Direccion)
-  @JoinColumn([{ name: 'direccionId', referencedColumnName: 'id' }])
+
+  @Column()
+  idDireccion: number;
+
+  @ManyToOne(() => Direccion, { nullable: false } )
+  @JoinColumn([{ name: 'idDireccion', referencedColumnName: 'id' }])
   direccion: Direccion;
+
+  public getFormatResponse(): Usuario {
+    const response = {...this};
+
+    delete response['idDireccion'];
+    delete response['contrasenia'];
+
+    return response;
+  } 
 }
