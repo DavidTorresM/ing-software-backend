@@ -8,7 +8,7 @@ import { DocenteController } from './controller/docente.controller';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Docente]),
-  ]
+  ],
   providers: [DocenteService],
   controllers: [DocenteController]
 })

@@ -12,7 +12,6 @@ import { DocenteModule } from './docente/docente.module';
 import { AdministradorModule } from './administrador/administrador.module';
 import { SituacionAcademicaModule } from './situacion-academica/situacion-academica.module';
 import { AlumnoModule } from './alumno/alumno.module';
-import { AlumnoController } from './alumnno/controller/alumno.controller';
 import { MateriaModule } from './materia/materia.module';
 import { CursoModule } from './curso/curso.module';
 import { SalaModule } from './sala/sala.module';
@@ -50,7 +49,7 @@ import { ArchivoModule } from './archivo/archivo.module';
     PublicacionModule,
     ArchivoModule
   ],
-  controllers: [AppController, AlumnoController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
