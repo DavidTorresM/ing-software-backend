@@ -30,7 +30,7 @@ export class Curso {
   @ManyToOne(() => Docente)
   @JoinColumn([{
     name: 'idDocente',
-    referencedColumnName: 'id',
+    referencedColumnName: 'idUsuario',
   }])
   docente: Docente;
 }

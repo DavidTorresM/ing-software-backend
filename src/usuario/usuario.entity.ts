@@ -18,19 +18,20 @@ export class Usuario {
   @Index({ unique: true })
   email: string;
   
-  @Column()
+  
+  @Column({ nullable: false })
   contrasenia: string;
 
-  @Column()
+  @Column({ nullable: false })  
   nombre: string;
 
-  @Column()
+  @Column({ nullable: false })
   primerApellido: string;
 
-  @Column()
+  @Column({ nullable: false })
   segundoApellido: string;
 
-  @Column()
+  @Column({ nullable: false })
   idDireccion: number;
 
   @ManyToOne(() => Direccion, { nullable: false } )
@@ -42,6 +43,8 @@ export class Usuario {
 
     delete response['idDireccion'];
     delete response['contrasenia'];
+
+    console.log(response);
 
     return response;
   } 

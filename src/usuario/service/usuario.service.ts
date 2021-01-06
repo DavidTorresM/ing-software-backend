@@ -48,11 +48,11 @@ export class UsuarioService {
       { relations: relacionesUsuario }
     );
 
-    usuario.direccion = usuario.direccion.getResponseFormat();
-
     if (!usuario) {
       return null;
     }
+
+    usuario.direccion = usuario.direccion.getResponseFormat();
 
     return usuario.getFormatResponse();
   }

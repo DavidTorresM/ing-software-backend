@@ -12,9 +12,9 @@ export class EstadoService {
   ) {}
 
   async crear(estado: EstadoDTO): Promise< Estado > {
-    const nuevaEstado = this.repositorioEstado.create(estado);
+    const nuevoEstado = this.repositorioEstado.create(estado);
 
-    return this.repositorioEstado.save(nuevaEstado);
+    return this.repositorioEstado.save(nuevoEstado);
   }
 
   async obtenerEstado(id: number): Promise< Estado | null > {

@@ -1,7 +1,7 @@
 import {
   Entity,
   JoinColumn,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   OneToOne,
 } from 'typeorm';
 
@@ -9,10 +9,13 @@ import { Usuario } from '../usuario/usuario.entity';
 
 @Entity()
 export class Administrador {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn()
+  idUsuario: string;
 
   @OneToOne(() => Usuario)
-  @JoinColumn()
+  @JoinColumn([{
+    name: 'idUsuario',
+    referencedColumnName: 'id',
+  }])
   usuario: Usuario;
 }
