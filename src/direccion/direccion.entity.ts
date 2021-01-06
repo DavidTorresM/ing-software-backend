@@ -20,22 +20,31 @@ export class Direccion {
   
   @Column()
   numero: number;
-  
-  @ManyToOne(() => Colonia)
+
+  @Column()
+  idColonia: number;
+
+  @Column()
+  idDelegacion: number;
+
+  @Column()
+  idEstado: number;
+
+  @ManyToOne(() => Colonia, { nullable: false })
   @JoinColumn([{
     name: 'idColonia',
     referencedColumnName: 'id',
   }])
   colonia: Colonia;
 
-  @ManyToOne(() => Delegacion)
+  @ManyToOne(() => Delegacion, { nullable: false })
   @JoinColumn([{
     name: 'idDelegacion',
     referencedColumnName: 'id',
   }])
   delegacion: Delegacion;
 
-  @ManyToOne(() => Estado)
+  @ManyToOne(() => Estado, { nullable: false })
   @JoinColumn([{
     name: 'idEstado',
     referencedColumnName: 'id',
