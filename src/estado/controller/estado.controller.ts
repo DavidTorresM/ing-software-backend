@@ -6,7 +6,7 @@ import {
   Post,
 } from '@nestjs/common'
 
-import { Estado } from '../Estado.entity';
+import { Estado } from '../estado.entity';
 import { EstadoDTO } from '../interface/estado.interface';
 import { EstadoService } from '../service/estado.service';
 
