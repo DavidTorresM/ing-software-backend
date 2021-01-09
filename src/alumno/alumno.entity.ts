@@ -1,8 +1,10 @@
 import {
+  Column,
   Entity,
+  Index,
   JoinColumn,
   JoinTable,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   ManyToMany,
   ManyToOne,
   OneToOne,
@@ -14,24 +16,41 @@ import { Usuario } from '../usuario/usuario.entity';
 
 @Entity()
 export class Alumno {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn()
+  @Index({ unique: true })
+  idUsuario: string;
 
-  @OneToOne(() => Usuario)
-  @JoinColumn()
+  @Column({ nullable: false })
+  idSituacionAcademica: number;
+
+  @OneToOne(() => Usuario, { nullable: false })
+  @JoinColumn([{
+    name: 'idUsuario',
+    referencedColumnName: 'id',
+  }])
   usuario: Usuario;
 
-  @ManyToOne(() => SituacionAcademica)
+  @ManyToOne(() => SituacionAcademica,{ nullable: false })
   @JoinColumn([{
     name: 'idSituacionAcademica',
     referencedColumnName: 'id',
   }])
   situacionAcademica: SituacionAcademica;
 
-
   @ManyToMany(() => Curso)
   @JoinTable({
     name: 'AlumnoCursa',
   })
   cursos: Curso[];
+
+  getFormatResponse(): Alumno {
+    const response = {...this};
+
+    delete response['idUsuario'];
+    delete response['idSituacionAcademica'];
+
+    response.usuario = response.usuario.getFormatResponse();
+
+    return response;
+  }
 }

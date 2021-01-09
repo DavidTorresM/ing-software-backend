@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  Index,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -10,5 +11,6 @@ export class SituacionAcademica {
   id: number;
 
   @Column()
+  @Index({ unique: true })
   nombre: string;
 }
