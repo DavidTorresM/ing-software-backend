@@ -1,5 +1,5 @@
 export interface CursoDTO {
-    idMateria: string;
+    idMateria: number;
     idDocente: string;
     horaInicio: Date;
     horaFin: Date;

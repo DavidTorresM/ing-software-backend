@@ -30,6 +30,8 @@ export class CursoService {
     }
     async crear(curso: CursoDTO): Promise< Curso >{
         const nuevoCurso = this.repositorioCurso.create(curso);
+        console.log(nuevoCurso);
+        console.log(curso);
         return this.repositorioCurso.save(nuevoCurso);
     }
 }

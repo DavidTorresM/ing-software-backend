@@ -12,7 +12,7 @@ import { Materia } from '../materia/materia.entity';
 
 @Entity()
 export class Curso {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column('timestamp with time zone')
