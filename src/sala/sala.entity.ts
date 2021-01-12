@@ -1,4 +1,5 @@
 import {
+  Column, 
   Entity,
   JoinColumn,
   ManyToOne,
@@ -13,6 +14,9 @@ import { Mensaje } from '../mensaje/mensaje.entity';
 export class Sala {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  idCurso: string;
 
   @OneToOne(() => Curso)
   @JoinColumn([{
