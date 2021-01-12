@@ -29,13 +29,15 @@ export class UsuarioService {
     return this.repositorioUsuario.save(nuevoUsuario);
   }
 
-  async obtenerUsuarioPorId(id: string): Promise< Usuario | null > {
+  async obtenerUsuarioPorCampo(nombre: string, valor: string): Promise< Usuario | null> {
+    const campos = {
+      [nombre]: valor,
+    };
+   
     const usuario = await this.repositorioUsuario.findOne(
-      { id },
+      campos,
       { relations: relacionesUsuario }
     );
-
-    usuario.direccion = usuario.direccion.getResponseFormat();
 
     if (!usuario) {
       return null;
@@ -44,18 +46,11 @@ export class UsuarioService {
     return usuario.getFormatResponse();
   }
 
+  async obtenerUsuarioPorId(id: string): Promise< Usuario | null > {
+    return this.obtenerUsuarioPorCampo('id', id);
+  }
+
   async obtenerUsuarioPorEmail(email: string): Promise< Usuario | null > {
-    const usuario = await this.repositorioUsuario.findOne(
-      { email },
-      { relations: relacionesUsuario }
-    );
-
-    if (!usuario) {
-      return null;
-    }
-
-    usuario.direccion = usuario.direccion.getResponseFormat();
-
-    return usuario.getFormatResponse();
+    return this.obtenerUsuarioPorCampo('email', email);
   }
 }

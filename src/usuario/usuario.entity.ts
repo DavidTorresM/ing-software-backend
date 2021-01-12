@@ -18,7 +18,6 @@ export class Usuario {
   @Index({ unique: true })
   email: string;
   
-  
   @Column({ nullable: false })
   contrasenia: string;
 
@@ -44,7 +43,7 @@ export class Usuario {
     delete response['idDireccion'];
     delete response['contrasenia'];
 
-    console.log(response);
+    response.direccion = response.direccion.getResponseFormat();
 
     return response;
   } 
