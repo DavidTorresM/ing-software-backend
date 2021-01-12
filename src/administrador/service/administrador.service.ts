@@ -26,6 +26,8 @@ export class AdministradorService {
 
     async obtenerAdministrador(idUsuario: string): Promise< Administrador | null>{
         const admin = await this.repositorioAdministrador.findOne({idUsuario},{ relations: relacionesAdministrador });
+        if(!admin)
+            return null;
         return admin;
     }
     async obtenerAdministradores(): Promise< Administrador[] >{
