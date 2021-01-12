@@ -2,7 +2,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   OneToOne,
 } from 'typeorm';
 
@@ -11,7 +11,7 @@ import { Mensaje } from '../mensaje/mensaje.entity';
 
 @Entity()
 export class Sala {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @OneToOne(() => Curso)
