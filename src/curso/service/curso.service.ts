@@ -10,10 +10,7 @@ const relacionesCurso: string[] = [
     'materia',
     'docente',
   ];
-interface CursoObjectDTO extends CursoDTO {
-    materia: Materia;
-    docente: Docente;
-}
+
 @Injectable()
 export class CursoService {
     constructor(
@@ -34,12 +31,15 @@ export class CursoService {
         return curso;
     }
     async crear(curso: CursoDTO): Promise< Curso >{
-        const nuevoCurso = this.repositorioCurso.create({
+        const nuevoCurso = this.repositorioCurso.create(curso);
+        /*
+            const nuevoCurso = this.repositorioCurso.create({
             "materia":{"id":curso.idMateria},
             "docente":{"idUsuario":curso.idDocente},
             "horaInicio":curso.horaInicio,
             "horaFin":curso.horaFin
         });
+        */
         return this.repositorioCurso.save(nuevoCurso);
     }
 }
