@@ -19,6 +19,13 @@ export class Mensaje {
   
   @Column()
   texto: string;
+
+  @Column()
+  idSala:number;
+
+  @Column()
+  idAutor:string;
+
   
   @ManyToOne(() => Sala, sala => sala.mensajes)
   @JoinColumn([{
