@@ -13,7 +13,6 @@ export class SalaService {
 
   async crear(sala: SalaDTO): Promise< Sala > {
     const nuevaSala = this.repositorioSala.create(sala);
-
     return this.repositorioSala.save(nuevaSala);
   }
 
