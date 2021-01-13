@@ -27,4 +27,9 @@ export class Sala {
 
   @OneToMany(() => Mensaje, mensaje => mensaje.sala)
   mensajes: Mensaje[];
+
+
+  public getFormatResponse(): Mensaje|null {
+    return null;
+  } 
 }

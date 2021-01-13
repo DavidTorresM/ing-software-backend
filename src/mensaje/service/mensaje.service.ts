@@ -4,7 +4,10 @@ import {Repository } from 'typeorm';
 
 import { Mensaje } from '../mensaje.entity';
 import { MensajeDTO } from '../interface/mensaje.interface';
-import { Usuario } from 'src/usuario/usuario.entity';
+
+const relacionesMensaje: string[] = [
+  'autor'
+];
 
 @Injectable()
 export class MensajeService {
@@ -19,14 +22,12 @@ export class MensajeService {
   }
 
   async obtenerMensaje(id: number): Promise< Mensaje[] | null > {
-    const mensaje = await this.repositorioMensaje.find({
-      relations:["usuario"],
-    });
+    const mensaje = await this.repositorioMensaje.find({ relations: relacionesMensaje });
     return mensaje;
   }
 
   async obtenerMensajes(): Promise< Mensaje[] > {
-    const mensajees = this.repositorioMensaje.find();
+    const mensajees = this.repositorioMensaje.find({relations:relacionesMensaje});
 
     return mensajees;
   }

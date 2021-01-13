@@ -40,4 +40,7 @@ export class Mensaje {
     referencedColumnName: 'id',
   }])
   autor: Usuario;
+  
+
+
 }
