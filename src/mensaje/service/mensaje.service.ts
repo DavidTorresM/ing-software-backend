@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {Repository } from 'typeorm';
+import {DeleteResult, Repository } from 'typeorm';
 
 import { Mensaje } from '../mensaje.entity';
 import { MensajeDTO } from '../interface/mensaje.interface';
@@ -21,14 +21,24 @@ export class MensajeService {
     return this.repositorioMensaje.save(nuevaMensaje);
   }
 
-  async obtenerMensaje(id: number): Promise< Mensaje[] | null > {
-    const mensaje = await this.repositorioMensaje.find({ relations: relacionesMensaje });
+  async obtenerMensajePorSala(id: number): Promise< Mensaje[] | null > {
+    const mensaje = await this.repositorioMensaje.find({ where:{idSala:id},relations: relacionesMensaje });
+
+    return mensaje;
+  }
+
+  async eliminarMensajePorId(id: number): Promise< Mensaje|null > {
+    const mensaje = await this.repositorioMensaje.findOne({ id });
+
+    if(mensaje){
+      await this.repositorioMensaje.delete(id);
+    }
     return mensaje;
   }
 
   async obtenerMensajes(): Promise< Mensaje[] > {
     const mensajees = this.repositorioMensaje.find({relations:relacionesMensaje});
-
+    
     return mensajees;
   }
 

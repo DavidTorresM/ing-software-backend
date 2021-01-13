@@ -4,6 +4,7 @@ import {
     Get,
     Param,
     Post,
+    Delete
   } from '@nestjs/common'
   
   import { Mensaje } from '../mensaje.entity';
@@ -25,7 +26,13 @@ import {
     
     @Get('listar/:id')
     async obtenerMensaje(@Param('id') id: number): Promise< Mensaje[] | null >{
-      const respuesta = await this.servicioMensaje.obtenerMensaje(id);
+      const respuesta = await this.servicioMensaje.obtenerMensajePorSala(id);
+  
+      return respuesta;
+    }
+    @Delete('eliminar/:id')
+    async eliminarMensaje(@Param('id') id: number): Promise< Mensaje | null >{
+      const respuesta = await this.servicioMensaje.eliminarMensajePorId(id);
   
       return respuesta;
     }
