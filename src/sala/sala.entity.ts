@@ -3,7 +3,7 @@ import {
   Entity,
   JoinColumn,
   PrimaryGeneratedColumn,
-  OneToMany,
+  ManyToOne,
   OneToOne,
 } from 'typeorm';
 
@@ -25,7 +25,7 @@ export class Sala {
   }])
   Curso: Curso;
 
-  @OneToMany(() => Mensaje, mensaje => mensaje.sala)
+  @ManyToOne(() => Mensaje, mensaje => mensaje.sala)
   mensajes: Mensaje[];
 
 
