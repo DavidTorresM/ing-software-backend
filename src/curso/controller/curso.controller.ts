@@ -17,6 +17,8 @@ export class CursoController {
     @Post("crear")
     async crearCurso(@Body() cursoDTO:CursoDTO): Promise< Curso >{
         const respuesta = await this.servicioCurso.crear(cursoDTO);
+        console.log(cursoDTO);
+        console.log(respuesta);
         return respuesta;
     }
     @Get("buscar/:id")
