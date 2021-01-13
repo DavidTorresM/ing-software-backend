@@ -19,7 +19,7 @@ export class PublicacionController {
 	@Post('crear')
 	async crearPublicacion(@Body() publicacion: PublicacionDTO): Promise< Publicacion >{
 		const respuesta = await this.servicioPublicacion.crear(publicacion);
-
+		
 		return respuesta;
 	}
 
@@ -28,5 +28,12 @@ export class PublicacionController {
 		const publicacion = await this.servicioPublicacion.obtenerPublicacion(id);
 
 		return publicacion;
+	}
+
+	@Get('listar')
+	async obtenerPublicaciones(): Promise< Publicacion[] >{
+		const publicaciones = await this.servicioPublicacion.obtenerPublicaciones();
+
+		return publicaciones;
 	}
 }

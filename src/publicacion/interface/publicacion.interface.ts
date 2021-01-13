@@ -3,5 +3,5 @@ export interface PublicacionDTO{
 	descripcion: string;
 	fechaPublicacion: Date;
 	idSala: number;
-	archivoUrl: string;
+	archivoUrl?: string;
 }

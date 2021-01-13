@@ -13,7 +13,7 @@ export class PublicacionService {
 
 	async crear(publicacion: PublicacionDTO):Promise< Publicacion >{
 		const nuevaPublicacion = this.repositorioPublicacion.create(publicacion);
-		console.log(nuevaPublicacion);
+		
 		return this.repositorioPublicacion.save(nuevaPublicacion);
 	}
 
@@ -23,5 +23,11 @@ export class PublicacionService {
 		});
 
 		return publicacion;
+	}
+
+	async obtenerPublicaciones(): Promise< Publicacion[] > {
+		const publicaciones = await this.repositorioPublicacion.find();
+
+		return publicaciones;
 	}
 }
