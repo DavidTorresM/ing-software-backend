@@ -28,10 +28,12 @@ export class AdministradorService {
         const admin = await this.repositorioAdministrador.findOne({idUsuario},{ relations: relacionesAdministrador });
         if(!admin)
             return null;
-        return admin;
+        return admin.getFormatResponse();
     }
     async obtenerAdministradores(): Promise< Administrador[] >{
-        const administradores = this.repositorioAdministrador.find({ relations: relacionesAdministrador });
-        return administradores;
+        const administradores = await this.repositorioAdministrador.find({ relations: relacionesAdministrador });
+        if(!administradores)
+            return null;
+        return administradores.map(admin => admin.getFormatResponse());;
     }
 }

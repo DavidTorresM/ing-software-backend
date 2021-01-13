@@ -23,28 +23,15 @@ export class DocenteController {
     @Get('buscar/:id')
     async obtenerDocente(@Param('id') id: string): Promise< Docente | null >{
       const respuesta = await this.servicioDocente.obtenerDocente(id);
-      
-      delete respuesta.usuario.id;
-      delete respuesta.usuario.idDireccion;
-      delete respuesta.usuario.direccion.id;
-      delete respuesta.usuario.direccion.idColonia;
-      delete respuesta.usuario.direccion.idDelegacion;
-      delete respuesta.usuario.direccion.idEstado;
-
-      return respuesta;
+      if(!respuesta)
+        return null;
+      return respuesta.getFormatResponse();
     }
   
     @Get('listar')
     async obtenerDocentees() : Promise< Docente[] > {
       const respuesta = await this.servicioDocente.obtenerDocentees();
-      respuesta.map(admin => {
-        delete admin.usuario.id;
-        delete admin.usuario.idDireccion;
-        delete admin.usuario.direccion.id;
-        delete admin.usuario.direccion.idColonia;
-        delete admin.usuario.direccion.idDelegacion;
-        delete admin.usuario.direccion.idEstado;
-      });
-      return respuesta;
+      
+      return respuesta.map(admin => admin.getFormatResponse());;
     }
 }
