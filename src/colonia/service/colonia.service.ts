@@ -26,7 +26,7 @@ export class ColoniaService {
   }
 
   async obtenerColonias(): Promise< Colonia[] > {
-    const colonias = this.repositorioColonia.find();
+    const colonias = await this.repositorioColonia.find();
 
     return colonias;
   }

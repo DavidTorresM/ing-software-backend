@@ -18,4 +18,14 @@ export class Administrador {
     referencedColumnName: 'id',
   }])
   usuario: Usuario;
+
+  getFormatResponse(): Administrador {
+    const response = {...this};
+
+    response.usuario = response.usuario.getFormatResponse();
+    delete response.usuario["id"];
+    return response;
+  }
+
+
 }
