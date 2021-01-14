@@ -22,7 +22,7 @@ export class MensajeService {
   }
 
   async obtenerMensajePorSala(id: number): Promise< Mensaje[] | null > {
-    const mensaje = await this.repositorioMensaje.find({ where:{idSala:id},relations: relacionesMensaje });
+    const mensaje = await this.repositorioMensaje.findOne({ idSala: id }, { relations: relacionesMensaje });
 
     return mensaje.map(mensaje => mensaje.getFormatResponse());
   }
