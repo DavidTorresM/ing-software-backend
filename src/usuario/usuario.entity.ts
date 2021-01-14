@@ -43,8 +43,8 @@ export class Usuario {
     delete response['idDireccion'];
     delete response['contrasenia'];
 
-    if(response.direccion)
-      response.direccion = response.direccion.getResponseFormat();
+    
+    response.direccion && (response.direccion = response.direccion.getResponseFormat());
 
     return response;
   } 

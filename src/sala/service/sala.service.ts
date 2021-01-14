@@ -11,6 +11,7 @@ const relacionesSala: string[] = [
   'curso.materia',
   'curso.docente',
   'curso.docente.usuario',
+  
 ];
 
 @Injectable()

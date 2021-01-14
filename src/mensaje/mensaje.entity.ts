@@ -44,7 +44,7 @@ export class Mensaje {
   public getFormatResponse(): Mensaje {
     const response = {...this};
     delete response['idAutor'];
-    response.autor = response.autor.getFormatResponse();
+    response.autor && (response.autor = response.autor.getFormatResponse());
     return response;
   }
 

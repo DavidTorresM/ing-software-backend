@@ -1,3 +1,4 @@
+
 import {
   Column, 
   Entity,
@@ -9,7 +10,6 @@ import {
 
 import { Curso } from '../curso/curso.entity';
 import { Mensaje } from '../mensaje/mensaje.entity';
-
 @Entity()
 export class Sala {
   @PrimaryGeneratedColumn()
