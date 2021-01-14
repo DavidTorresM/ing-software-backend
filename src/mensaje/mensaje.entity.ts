@@ -19,6 +19,13 @@ export class Mensaje {
   
   @Column()
   texto: string;
+
+  @Column()
+  idSala:number;
+
+  @Column()
+  idAutor:string;
+
   
   @ManyToOne(() => Sala, sala => sala.mensajes)
   @JoinColumn([{
@@ -33,4 +40,12 @@ export class Mensaje {
     referencedColumnName: 'id',
   }])
   autor: Usuario;
+  
+  public getFormatResponse(): Mensaje {
+    const response = {...this};
+    delete response['idAutor'];
+    response.autor = response.autor.getFormatResponse();
+    return response;
+  }
+
 }

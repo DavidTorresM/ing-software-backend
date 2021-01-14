@@ -18,4 +18,14 @@ export class Docente {
     referencedColumnName: 'id'
   }])
   usuario: Usuario;
+
+
+  public getFormatResponse(): Docente {
+    const response = {...this};
+    response.usuario = response.usuario.getFormatResponse();
+    delete response.usuario["id"];
+    return response;
+  }
+
+
 }
