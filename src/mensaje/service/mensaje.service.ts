@@ -21,8 +21,8 @@ export class MensajeService {
     return this.repositorioMensaje.save(nuevaMensaje);
   }
 
-  async obtenerMensajePorSala(id: number): Promise< Mensaje[] | null > {
-    const mensaje = await this.repositorioMensaje.findOne({ idSala: id }, { relations: relacionesMensaje });
+  async obtenerMensajePorSala(id: number): Promise< Mensaje[] > {
+    const mensaje = await this.repositorioMensaje.find({ where:{idSala:id}, relations: relacionesMensaje });
 
     return mensaje.map(mensaje => mensaje.getFormatResponse());
   }
