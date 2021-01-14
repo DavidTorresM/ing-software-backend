@@ -21,8 +21,12 @@ export class PublicacionService {
 		const publicacion = await this.repositorioPublicacion.findOne({
 			id,
 		}, {
-		        relations: ['archivo'],
+		        relations: ['archivo','sala'],
 		});
+
+		if(!publicacion){
+			return null;
+		}
 
 		return publicacion;
 	}
