@@ -4,6 +4,7 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import { Docente } from '../docente/docente.entity';
@@ -19,6 +20,12 @@ export class Curso {
 
   @Column('timestamp with time zone')
   horaFin: Date;
+
+  @Column()
+  idMateria: number;
+
+  @Column()
+  idDocente: string;
 
   @ManyToOne(() => Materia)
   @JoinColumn([{

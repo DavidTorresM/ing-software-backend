@@ -24,6 +24,8 @@ export class UsuarioService {
 
     const nuevoUsuario = this.repositorioUsuario.create(usuario);
 
+    console.log(nuevoUsuario);
+
     return this.repositorioUsuario.save(nuevoUsuario);
   }
 
