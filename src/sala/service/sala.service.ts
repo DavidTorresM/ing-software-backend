@@ -7,10 +7,10 @@ import { SalaDTO } from '../interface/sala.interface';
 
 
 const relacionesSala: string[] = [
-  'Curso',
-  'Curso.materia',
-  'Curso.docente',
-  'Curso.docente.usuario',
+  'curso',
+  'curso.materia',
+  'curso.docente',
+  'curso.docente.usuario',
 ];
 
 @Injectable()
@@ -21,17 +21,19 @@ export class SalaService {
 
   async crear(sala: SalaDTO): Promise< Sala > {
     const nuevaSala = this.repositorioSala.create(sala);
+    
     return this.repositorioSala.save(nuevaSala);
   }
 
   async obtenerSala(id: number): Promise< Sala | null > {
-    console.log(id);
     const sala = await this.repositorioSala.findOne({
       id, 
     },{ relations:relacionesSala });
+    
     if(!sala)
       return null;
-    return sala.getFormatResponse();
+   
+      return sala.getFormatResponse();
   }
 
   async obtenerSalas(): Promise< Sala[] > {

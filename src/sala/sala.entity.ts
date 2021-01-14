@@ -23,7 +23,7 @@ export class Sala {
     name: 'idCurso',
     referencedColumnName: 'id',
   }])
-  Curso: Curso;
+  curso: Curso;
 
   @OneToMany(() => Mensaje, mensaje => mensaje.sala)
   mensajes: Mensaje[];
@@ -32,12 +32,9 @@ export class Sala {
 
   public getFormatResponse(): Sala {
     const response = {...this};
-
     
     delete response['idCurso'];
-    delete response['Curso']["idMateria"];
-    delete response['Curso']["idDocente"];
-    response.Curso = response.Curso.getFormatResponse();
+    response.curso = response.curso.getFormatResponse();
     
     return response;
   }
