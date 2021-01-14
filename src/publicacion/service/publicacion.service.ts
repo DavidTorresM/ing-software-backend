@@ -20,6 +20,8 @@ export class PublicacionService {
 	async obtenerPublicacion(id: number): Promise< Publicacion | null >{
 		const publicacion = await this.repositorioPublicacion.findOne({
 			id,
+		}, {
+		        relations: ['archivo'],
 		});
 
 		return publicacion;
