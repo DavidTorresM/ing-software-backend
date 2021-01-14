@@ -20,9 +20,8 @@ export class Docente {
   usuario: Usuario;
 
 
-  getFormatResponse(): Docente {
+  public getFormatResponse(): Docente {
     const response = {...this};
-
     response.usuario = response.usuario.getFormatResponse();
     delete response.usuario["id"];
     return response;
