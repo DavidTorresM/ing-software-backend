@@ -24,7 +24,7 @@ export class MensajeService {
   async obtenerMensajePorSala(id: number): Promise< Mensaje[] | null > {
     const mensaje = await this.repositorioMensaje.find({ where:{idSala:id},relations: relacionesMensaje });
 
-    return mensaje;
+    return mensaje.map(mensaje => mensaje.getFormatResponse());
   }
 
   async eliminarMensajePorId(id: number): Promise< Mensaje|null > {
@@ -37,9 +37,10 @@ export class MensajeService {
   }
 
   async obtenerMensajes(): Promise< Mensaje[] > {
-    const mensajees = this.repositorioMensaje.find({relations:relacionesMensaje});
-    
-    return mensajees;
+    const mensajees = await this.repositorioMensaje.find({relations:relacionesMensaje});
+    if(!mensajees)
+      return null;
+    return mensajees.map(mensaje => mensaje.getFormatResponse());
   }
 
 }

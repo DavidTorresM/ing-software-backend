@@ -40,4 +40,21 @@ export class Curso {
     referencedColumnName: 'idUsuario',
   }])
   docente: Docente;
+
+  public getFormatResponse(): Curso {
+    const response = {...this}; 
+    
+    delete response["idMateria"];
+    delete response["idDocente"];
+    delete response.docente.usuario.contrasenia;
+    delete response.docente.usuario.direccion;
+    //delete response.docente.usuario.email;
+    delete response.docente.usuario.idDireccion;
+    delete response.docente.usuario.id;
+
+
+    return response;
+  }
+
+
 }

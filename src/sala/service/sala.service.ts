@@ -5,6 +5,14 @@ import {Repository } from 'typeorm';
 import { Sala } from '../sala.entity';
 import { SalaDTO } from '../interface/sala.interface';
 
+
+const relacionesSala: string[] = [
+  'Curso',
+  'Curso.materia',
+  'Curso.docente',
+  'Curso.docente.usuario',
+];
+
 @Injectable()
 export class SalaService {
   constructor(
@@ -17,16 +25,18 @@ export class SalaService {
   }
 
   async obtenerSala(id: number): Promise< Sala | null > {
+    console.log(id);
     const sala = await this.repositorioSala.findOne({
-      id,
-    });
-
-    return sala;
+      id, 
+    },{ relations:relacionesSala });
+    if(!sala)
+      return null;
+    return sala.getFormatResponse();
   }
 
   async obtenerSalas(): Promise< Sala[] > {
-    const salaes = this.repositorioSala.find();
-
-    return salaes;
+    const salaes = await this.repositorioSala.find({relations:relacionesSala});
+    
+    return salaes.map( sala => sala.getFormatResponse() );
   }
 }

@@ -9,6 +9,7 @@ import { CursoDTO } from '../interface/curso.interface';
 const relacionesCurso: string[] = [
     'materia',
     'docente',
+    'docente.usuario',
   ];
 
 @Injectable()
@@ -18,7 +19,7 @@ export class CursoService {
     ) {}
     async obtenerCursos(): Promise< Curso[] >{
         const cursos = await this.repositorioCurso.find({ relations:relacionesCurso });
-        return cursos;
+        return cursos.map(curso => curso.getFormatResponse() );
     }
     async obtenerCurso(id: string): Promise <Curso | null> {
         const curso = await this.repositorioCurso.findOne({
@@ -28,7 +29,7 @@ export class CursoService {
         if (!curso)
             return null;
 
-        return curso;
+        return curso.getFormatResponse();
     }
     async crear(curso: CursoDTO): Promise< Curso >{
         const nuevoCurso = this.repositorioCurso.create(curso);

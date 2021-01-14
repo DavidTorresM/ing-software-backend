@@ -41,6 +41,11 @@ export class Mensaje {
   }])
   autor: Usuario;
   
-
+  public getFormatResponse(): Mensaje {
+    const response = {...this};
+    delete response['idAutor'];
+    response.autor = response.autor.getFormatResponse();
+    return response;
+  }
 
 }

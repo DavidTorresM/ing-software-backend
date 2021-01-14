@@ -29,7 +29,17 @@ export class Sala {
   mensajes: Mensaje[];
 
 
-  public getFormatResponse(): Mensaje|null {
-    return null;
-  } 
+
+  public getFormatResponse(): Sala {
+    const response = {...this};
+
+    
+    delete response['idCurso'];
+    delete response['Curso']["idMateria"];
+    delete response['Curso']["idDocente"];
+    response.Curso = response.Curso.getFormatResponse();
+    
+    return response;
+  }
+
 }
