@@ -43,7 +43,7 @@ export class Alumno {
   })
   cursos: Curso[];
 
-  getFormatResponse(): Alumno {
+  public getFormatResponse(): Alumno {
     const response = {...this};
 
     delete response['idUsuario'];
