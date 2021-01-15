@@ -12,7 +12,6 @@ export class ColoniaService {
   ) {}
 
   async crear(colonia: ColoniaDTO): Promise< Colonia > {
-    console.log(colonia)
     const nuevaColonia = this.repositorioColonia.create(colonia);
 
     return this.repositorioColonia.save(nuevaColonia);
