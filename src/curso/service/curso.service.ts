@@ -32,7 +32,10 @@ export class CursoService {
         return curso.getFormatResponse();
     }
     async crear(curso: CursoDTO): Promise< Curso >{
-        const nuevoCurso = this.repositorioCurso.create(curso);
+        curso.horaInicio = new Date("2204-11-19 "+curso.horaInicio+"+02");
+        curso.horaFin = new Date("2204-11-19 "+curso.horaFin+"+02");
+        const nuevoCurso = await this.repositorioCurso.create(curso);
+
         return this.repositorioCurso.save(nuevoCurso);
     }
 }

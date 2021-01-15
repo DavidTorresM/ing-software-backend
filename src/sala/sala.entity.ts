@@ -28,13 +28,13 @@ export class Sala {
   @OneToMany(() => Mensaje, mensaje => mensaje.sala)
   mensajes: Mensaje[];
 
-
-
   public getFormatResponse(): Sala {
     const response = {...this};
     
+
+
     delete response['idCurso'];
-    response.curso = response.curso.getFormatResponse();
+    response.curso && (response.curso = response.curso.getFormatResponse());
     
     return response;
   }
