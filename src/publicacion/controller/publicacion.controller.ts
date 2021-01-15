@@ -23,7 +23,7 @@ export class PublicacionController {
 		return respuesta;
 	}
 
-	@Get('buscar/id/:id')
+	@Get('buscar/:id')
 	async buscarPublicacion(@Param('id') id:number): Promise< Publicacion | null >{
 		const publicacion = await this.servicioPublicacion.obtenerPublicacion(id);
 
