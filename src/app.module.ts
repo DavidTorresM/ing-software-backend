@@ -18,6 +18,7 @@ import { SalaModule } from './sala/sala.module';
 import { MensajeModule } from './mensaje/mensaje.module';
 import { PublicacionModule } from './publicacion/publicacion.module';
 import { ArchivoModule } from './archivo/archivo.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -47,7 +48,8 @@ import { ArchivoModule } from './archivo/archivo.module';
     SalaModule,
     MensajeModule,
     PublicacionModule,
-    ArchivoModule
+    ArchivoModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
