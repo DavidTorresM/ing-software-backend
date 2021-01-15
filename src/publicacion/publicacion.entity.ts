@@ -2,7 +2,6 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -25,7 +24,13 @@ export class Publicacion {
   @Column('timestamp with time zone')
   fechaPublicacion: Date;
 
-  @ManyToOne(() => Sala)
+  @Column()
+  idSala: number;
+
+  @Column()
+  archivoUrl?: string;
+
+  @ManyToOne(() => Sala, { nullable: false })
   @JoinColumn([{
     name: 'idSala',
     referencedColumnName: 'id',
@@ -33,6 +38,9 @@ export class Publicacion {
   sala: Sala;
 
   @OneToOne(() => Archivo)
-  @JoinColumn()
+  @JoinColumn([{
+    name: 'archivoUrl',
+    referencedColumnName: 'url',
+  }])
   archivo: Archivo;
 }
