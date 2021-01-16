@@ -24,7 +24,7 @@ import { AdministradorModule } from '../administrador/administrador.module';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '15m' },
     }),
   ],
 })
