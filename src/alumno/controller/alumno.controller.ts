@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  UseGuards
 } from '@nestjs/common';
 
 import { Alumno } from '../alumno.entity';
@@ -15,7 +16,6 @@ export class AlumnoController {
   constructor(
     private servicioAlumno: AlumnoService,
    ) {}
-
   @Post('crear')
   async crearAlumno(@Body() alumnoDTO: AlumnoDTO): Promise< Alumno > {
     const respuesta = await this.servicioAlumno.crear(alumnoDTO);
@@ -23,6 +23,7 @@ export class AlumnoController {
     return respuesta;
   }
   
+  //@UseGuards(JwtAuthGuard)
   @Get('buscar/id/:id')
   async obtenerAlumnoPorId(@Param('id') id: string): Promise< Alumno | null >{
     const respuesta = await this.servicioAlumno.obtenerAlumnoPorId(id);

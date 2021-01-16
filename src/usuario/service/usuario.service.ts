@@ -53,10 +53,10 @@ export class UsuarioService {
     const usuario = await this.repositorioUsuario.findOne(
       campos
     );
-
     if (!usuario) {
       return null;
     }
+    
     return usuario;
   }
 

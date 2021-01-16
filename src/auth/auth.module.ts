@@ -8,11 +8,18 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 
+import { DocenteModule } from '../docente/docente.module';
+import { AlumnoModule } from '../alumno/alumno.module';
+import { AdministradorModule } from '../administrador/administrador.module';
+//Fecha de expiracion y la clave secreta
 @Module({
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],
   imports: [
+    AdministradorModule,
+    AlumnoModule,
+    DocenteModule,
     UsuarioModule, 
     PassportModule,
     JwtModule.register({
