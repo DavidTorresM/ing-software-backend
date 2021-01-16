@@ -7,4 +7,3 @@ export const enum Privilege {
     ALUMNO="ALUMNO",
     DOCENTE="DOCENTE",
 }
-

@@ -4,7 +4,12 @@ import {
   Get,
   Param,
   Post,
+  UseGuards,
 } from '@nestjs/common';
+
+import { JwtAuthGuardAdministrador } from '../../auth/guards/jwt-aut.administrador.guard';
+import { JwtAuthGuardDocente } from '../../auth/guards/jwt-aut.docente.guard';
+import { JwtAuthGuardAlumno } from '../../auth/guards/jwt-auth.alumno.guard';
 
 import { Usuario } from '../usuario.entity';
 import { UsuarioDTO } from '../interface/usuario.interface';

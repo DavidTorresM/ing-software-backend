@@ -4,7 +4,12 @@ import {
 	Get,
 	Param,
 	Post,
-  } from '@nestjs/common';
+	UseGuards,
+} from '@nestjs/common';
+
+import { JwtAuthGuardAdministrador } from '../../auth/guards/jwt-aut.administrador.guard';
+import { JwtAuthGuardDocente } from '../../auth/guards/jwt-aut.docente.guard';
+import { JwtAuthGuardAlumno } from '../../auth/guards/jwt-auth.alumno.guard';
 
 import { Publicacion } from '../publicacion.entity';
 import { PublicacionDTO } from '../interface/publicacion.interface';
@@ -15,14 +20,14 @@ export class PublicacionController {
 	constructor(
 		private servicioPublicacion: PublicacionService,
 	){}
-
+	@UseGuards(JwtAuthGuardDocente)  
 	@Post('crear')
 	async crearPublicacion(@Body() publicacion: PublicacionDTO): Promise< Publicacion >{
 		const respuesta = await this.servicioPublicacion.crear(publicacion);
 		
 		return respuesta;
 	}
-
+	@UseGuards(JwtAuthGuardAlumno)  
 	@Get('buscar/id/:id')
 	async buscarPublicacion(@Param('id') id:number): Promise< Publicacion | null >{
 		const publicacion = await this.servicioPublicacion.obtenerPublicacion(id);
@@ -30,6 +35,7 @@ export class PublicacionController {
 		return publicacion;
 	}
 
+	@UseGuards(JwtAuthGuardAlumno)  
 	@Get('listar')
 	async obtenerPublicaciones(): Promise< Publicacion[] >{
 		const publicaciones = await this.servicioPublicacion.obtenerPublicaciones();
