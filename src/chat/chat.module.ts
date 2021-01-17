@@ -21,7 +21,6 @@ import { RoomsService } from '../rooms/rooms.service';
   imports: [
     MensajeModule,
     SalaModule,
-    
   ],
   providers: [ChatGateway],
 })

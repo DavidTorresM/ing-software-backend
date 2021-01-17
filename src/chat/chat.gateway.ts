@@ -4,95 +4,60 @@ import {
   WsResponse,
   WebSocketServer,
   OnGatewayConnection,
-  OnGatewayDisconnect
+  OnGatewayDisconnect,
+  ConnectedSocket,
+  OnGatewayInit,
 } from '@nestjs/websockets';
   import { from, Observable } from 'rxjs';
   import { map } from 'rxjs/operators';
-  import { Server } from 'ws';
+import { MensajeDTO } from 'src/mensaje/interface/mensaje.interface';
+import { MensajeModule } from 'src/mensaje/mensaje.module';
   
 /*
 import { JwtService } from '../auth/jwt/jwt.service';
 import { User } from '../users/interfaces/user.interface';
 import { RoomsService } from '../rooms/rooms.service';
+
+
 */
+//import { Server } from 'socket.io';
+import { Socket, Server } from 'socket.io';
 
-@WebSocketGateway(4444)
-export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
+import { MensajeService } from '../mensaje/service/mensaje.service';
+
+@WebSocketGateway(8080,{ transports:['websocket'] })
+export class ChatGateway implements OnGatewayDisconnect, OnGatewayInit {
   @WebSocketServer()
-  server;
-
+  server: Server;
   connectedUsers: string[] = [];
 
   constructor(
+    private mensajeService: MensajeService,
       /*
     private jwtService: JwtService,
     private roomService: RoomsService,*/
   ) {}
-
-  async handleConnection(socket) {
-    /*
-    const user: User = await this.jwtService.verify(
-      socket.handshake.query.token,
-      true
-    );
-    */
-
-    this.connectedUsers = [...this.connectedUsers, String("Algun usuario")];
-    console.log("Conneccion entrante");
-    // Send list of connected users
-    this.server.emit('users', this.connectedUsers);
+  afterInit(){
+    console.log("[*] Inicializado el chat");
+  }
+  handleDisconnect(){
+    console.log("[*] Desconectando servidor");
+  }
+  @SubscribeMessage('chatToServer')
+  handleMessage(client: Socket, message: { sender: string, room: string, message: string }) {
+    this.server.to(message.room).emit('chatToClient', message);
   }
 
-  async handleDisconnect(socket) {
-      /*
-    const user: User = await this.jwtService.verify(
-      socket.handshake.query.token,
-      true
-    );
-    */
-    const userPos = this.connectedUsers.indexOf(String("Algun usuario"));
-
-    if (userPos > -1) {
-      this.connectedUsers = [
-        ...this.connectedUsers.slice(0, userPos),
-        ...this.connectedUsers.slice(userPos + 1)
-      ];
-    }
-
-    // Sends the new list of connected users
-    this.server.emit('users', this.connectedUsers);
+  @SubscribeMessage('joinRoom')
+  handleRoomJoin(client: Socket, room: string ) {
+    client.join(room);
+    client.emit('joinedRoom', room);
   }
 
-  @SubscribeMessage('events')
-  onEvent(client: any, data: any): Observable<WsResponse<number>> {
-    return from([1, 2, 3]).pipe(map(item => ({ event: 'events', data: item })));
+  @SubscribeMessage('leaveRoom')
+  handleRoomLeave(client: Socket, room: string ) {
+    client.leave(room);
+    client.emit('leftRoom', room);
   }
 
-  @SubscribeMessage('message')
-  async onMessage(client, data: any) {
-    const event: string = 'message';
-    const result = data[0];
-
-    //await this.roomService.addMessage(result.message, result.room);
-    client.broadcast.to(result.room).emit(event, result.message);
-
-    return Observable.create(observer =>
-      observer.next({ event, data: result.message })
-    );
-  }
-
-  @SubscribeMessage('join')
-  async onRoomJoin(client, data: any): Promise<any> {
-    client.join(data[0]);
-
-    //const messages = await this.roomService.findMessages(data, 25);
-
-    // Send last messages to the connected user
-    client.emit('message', ["Mensaje","join"]);
-  }
-
-  @SubscribeMessage('leave')
-  onRoomLeave(client, data: any): void {
-    client.leave(data[0]);
-  }
 }
