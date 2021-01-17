@@ -7,11 +7,14 @@ import {
   OnGatewayInit,
   WsException,
 } from '@nestjs/websockets';
+import { UseGuards } from '@nestjs/common';
 import { MensajeDTO } from 'src/mensaje/interface/mensaje.interface';
 import { Socket, Server } from 'socket.io';
 import { MensajeService } from '../mensaje/service/mensaje.service';
 import { SalaService } from '../sala/service/sala.service';
 import { SalaDTO } from 'src/sala/interface/sala.interface';
+import { JwtAuthGuardAlumno } from '../auth/guards/jwt-auth.alumno.guard';
+
 
 @WebSocketGateway(8080,{ transports:['websocket'] })
 export class ChatGateway implements OnGatewayConnection,OnGatewayDisconnect, OnGatewayInit {
@@ -35,6 +38,7 @@ export class ChatGateway implements OnGatewayConnection,OnGatewayDisconnect, OnG
   handleDisconnect(){
     console.log("[*] Desconectando servidor");
   }
+  @UseGuards(JwtAuthGuardAlumno)
   @SubscribeMessage('chatServer')
   handleMessage(client: Socket, message: MensajeDTO
     //{ sender: string, room: string, message: string }
@@ -46,6 +50,7 @@ export class ChatGateway implements OnGatewayConnection,OnGatewayDisconnect, OnG
 
   //NOTA Recibe el idCurso
   //salida el json de la sala a unirte
+  @UseGuards(JwtAuthGuardAlumno)
   @SubscribeMessage('unirseSala')
   async handleRoomJoin(client: Socket, room: SalaDTO ) {
     //verificando si al sala existe 
@@ -59,7 +64,7 @@ export class ChatGateway implements OnGatewayConnection,OnGatewayDisconnect, OnG
     client.join(room.idCurso);
     client.emit('unidoSala', sala);
   }
-
+  @UseGuards(JwtAuthGuardAlumno)
   @SubscribeMessage('abandonarSala')
   handleRoomLeave(client: Socket, room: SalaDTO ) {
     console.log("handleRoomLeave:\n",room);
