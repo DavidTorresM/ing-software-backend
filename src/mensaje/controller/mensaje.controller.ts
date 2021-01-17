@@ -21,7 +21,7 @@ import {
     constructor(
       private servicioMensaje: MensajeService,
      ) {}
-    @UseGuards(JwtAuthGuardAlumno)  
+    //@UseGuards(JwtAuthGuardAlumno)  
     @Post('crear')
     async crearMensaje(@Body() mensajeDTO: MensajeDTO): Promise< Mensaje > {
       const respuesta = await this.servicioMensaje.crear(mensajeDTO);
