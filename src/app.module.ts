@@ -19,6 +19,7 @@ import { MensajeModule } from './mensaje/mensaje.module';
 import { PublicacionModule } from './publicacion/publicacion.module';
 import { ArchivoModule } from './archivo/archivo.module';
 import { AuthModule } from './auth/auth.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -49,7 +50,8 @@ import { AuthModule } from './auth/auth.module';
     MensajeModule,
     PublicacionModule,
     ArchivoModule,
-    AuthModule
+    AuthModule,
+    ChatModule
   ],
   controllers: [AppController],
   providers: [AppService],
