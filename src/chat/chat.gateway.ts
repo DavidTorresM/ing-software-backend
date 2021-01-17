@@ -1,7 +1,6 @@
 import {
   WebSocketGateway,
   SubscribeMessage,
-  WsResponse,
   WebSocketServer,
   OnGatewayConnection,
   OnGatewayDisconnect,
