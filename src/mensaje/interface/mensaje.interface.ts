@@ -3,4 +3,5 @@ export interface MensajeDTO{
     texto:string;
     idSala:number;
     idAutor:string;
+    idCurso?:string;
 }

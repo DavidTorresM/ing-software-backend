@@ -36,6 +36,23 @@ export class SalaService {
    
       return sala.getFormatResponse();
   }
+  async obtenerSalaPorCampo(nombre: string, valor: string): Promise< Sala | null> {
+    const campos = {
+      [nombre]: valor,
+    };
+   
+    const sala = await this.repositorioSala.findOne(
+      campos,
+      { relations: relacionesSala }
+    );
+
+    if (!sala) {
+      return null;
+    }
+
+    return sala.getFormatResponse();
+  }
+
 
   async obtenerSalas(): Promise< Sala[] > {
     const salaes = await this.repositorioSala.find({relations:relacionesSala});
