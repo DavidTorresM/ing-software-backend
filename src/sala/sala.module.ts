@@ -10,6 +10,7 @@ import { SalaController } from './controller/sala.controller';
     TypeOrmModule.forFeature([Sala]),
   ],
   providers: [SalaService],
-  controllers: [SalaController]
+  controllers: [SalaController],
+  exports:[SalaService]
 })
 export class SalaModule {}

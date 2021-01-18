@@ -47,5 +47,5 @@ export class Usuario {
     response.direccion && (response.direccion = response.direccion.getResponseFormat());
 
     return response;
-  } 
+  }
 }

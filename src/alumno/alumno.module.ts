@@ -10,6 +10,7 @@ import { AlumnoController } from './controller/alumno.controller';
     TypeOrmModule.forFeature([Alumno]),
   ],
   providers: [AlumnoService],
-  controllers: [AlumnoController]
+  controllers: [AlumnoController],
+  exports:[AlumnoService],
 })
 export class AlumnoModule {}

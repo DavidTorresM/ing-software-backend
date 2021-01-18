@@ -19,6 +19,7 @@ export class AdministradorService {
     constructor(
         @InjectRepository(Administrador) private repositorioAdministrador: Repository < Administrador >
     ){}
+    
     async crear(administrador: AdministradorDTO): Promise< Administrador >{
         const nuevoAdmin = this.repositorioAdministrador.create(administrador);
         return this.repositorioAdministrador.save(nuevoAdmin);

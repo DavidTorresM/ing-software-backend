@@ -46,6 +46,20 @@ export class UsuarioService {
     return usuario.getFormatResponse();
   }
 
+  async obtenerUsuarioPorEmailPassword(email: string): Promise< Usuario | null> {
+    const campos = {
+      ["email"]: email,
+    };
+    const usuario = await this.repositorioUsuario.findOne(
+      campos
+    );
+    if (!usuario) {
+      return null;
+    }
+    
+    return usuario;
+  }
+
   async obtenerUsuarioPorId(id: string): Promise< Usuario | null > {
     return this.obtenerUsuarioPorCampo('id', id);
   }
