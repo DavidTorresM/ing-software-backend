@@ -3,6 +3,11 @@ import * as multer from  'multer';
 import * as AWS from 'aws-sdk';
 import * as multers3 from 'multer-s3';
 
+import { Archivo } from '../archivo.entity';
+import { ArchivoDTO } from '../interface/archivo.interface';
+import {Repository } from 'typeorm'
+import { InjectRepository } from '@nestjs/typeorm';
+
 const s3 = new AWS.S3();
 AWS.config.update({
   accessKeyId: 'AKIAJYK5ZVNOIX2B5FUQ',
@@ -12,7 +17,9 @@ AWS.config.update({
 
 @Injectable()
 export class ArchivoService {
-  constructor(){}
+  constructor(
+    @InjectRepository(Archivo) private repositorioArchivo: Repository< Archivo >
+  ){}
 
   upload = multer({
     storage: multers3({
@@ -40,4 +47,12 @@ export class ArchivoService {
       return res.status(500).json(`Error al subir un archivo: ${err.message}`);
     }
   }
+
+  async crear(archivo: ArchivoDTO ) :  Promise< Archivo > {
+    const nuevaColonia = this.repositorioArchivo.create(archivo);
+
+    return this.repositorioArchivo.save(nuevaColonia);
+  }
+
+
 }
