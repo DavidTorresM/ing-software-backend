@@ -12,7 +12,7 @@ import json
 # In[86]:
 
 
-path = "Informacion que se insertara en la bd con excel"#carpeta con los excel
+path = "../ing-software-utils/Informacion que se insertara en la bd con excel"#carpeta con los excel
 ip = "localhost" #Ip del servidor remoto
 port = "3000" #puerto de la api
 
