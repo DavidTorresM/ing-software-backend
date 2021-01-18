@@ -13,7 +13,7 @@ export class PublicacionService {
 
 	async crear(publicacion: PublicacionDTO):Promise< Publicacion >{
 		const nuevaPublicacion = this.repositorioPublicacion.create(publicacion);
-		
+		console.log(publicacion);
 		return this.repositorioPublicacion.save(nuevaPublicacion);
 	}
 
@@ -21,7 +21,7 @@ export class PublicacionService {
 		const publicacion = await this.repositorioPublicacion.findOne({
 			id,
 		}, {
-		        relations: ['archivo','sala'],
+		    relations: ['archivo','sala'],
 		});
 
 		if(!publicacion){
