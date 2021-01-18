@@ -22,7 +22,8 @@ export class PublicacionController {
 	){}
 	@UseGuards(JwtAuthGuardDocente)  
 	@Post('crear')
-	async crearPublicacion(@Body() publicacion: PublicacionDTO): Promise< Publicacion >{
+	async crearPublicacion(@Body() publicacion: any): Promise< Publicacion >{
+		console.log('hola');
 		const respuesta = await this.servicioPublicacion.crear(publicacion);
 		
 		return respuesta;

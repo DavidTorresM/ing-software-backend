@@ -48,11 +48,13 @@ export class UsuarioService {
 
   async obtenerUsuarioPorEmailPassword(email: string): Promise< Usuario | null> {
     const campos = {
-      ["email"]: email,
+      email,
     };
+
     const usuario = await this.repositorioUsuario.findOne(
       campos
     );
+    
     if (!usuario) {
       return null;
     }
