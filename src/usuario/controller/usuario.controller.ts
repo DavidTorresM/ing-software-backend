@@ -42,7 +42,7 @@ export class UsuarioController {
 
     return respuesta;
   }
-
+  @UseGuards(JwtAuthGuardAlumno)
   @Get('buscar/salas/:id')
   async obtenerSalasPorId(@Param('id') id: string): Promise< Sala[] | null >{
     const respuesta = await this.servicioUsuario.obtenerSalas(id);

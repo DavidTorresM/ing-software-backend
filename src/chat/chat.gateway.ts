@@ -39,20 +39,20 @@ export class ChatGateway implements OnGatewayConnection,OnGatewayDisconnect, OnG
     console.log("[*] Desconectando servidor");
   }
   @UseGuards(JwtAuthGuardAlumno)
-  @SubscribeMessage('chatServer')
+  @SubscribeMessage('chatToServer')
   handleMessage(client: Socket, message: MensajeDTO
     //{ sender: string, room: string, message: string }
     ) {
     this.mensajeService.crear(message);
     console.log("chatToServer:\n",message);
-    this.server.to(message.idCurso).emit('chatClient', message);
+    this.server.to(message.idCurso).emit('chatToClient', message);
   }
 
   //NOTA Recibe el idCurso
   //salida el json de la sala a unirte
   @UseGuards(JwtAuthGuardAlumno)
-  @SubscribeMessage('unirseSala')
-  async handleRoomJoin(client: Socket, room: SalaDTO ) {
+  @SubscribeMessage('joinRoom')
+  async handleRoomJoin(client: Socket, room ) {
     //verificando si al sala existe 
     const sala =await this.salaService.obtenerSalaPorCampo("idCurso",room.idCurso);
     if(!sala){
@@ -61,15 +61,15 @@ export class ChatGateway implements OnGatewayConnection,OnGatewayDisconnect, OnG
     }
     console.log("[info] La sala existe =)");
     console.log("handleRoomJoin:\n",room);
-    client.join(room.idCurso);
-    client.emit('unidoSala', sala);
+    client.join(room);
+    client.emit('joinedRoom', sala);
   }
   @UseGuards(JwtAuthGuardAlumno)
-  @SubscribeMessage('abandonarSala')
+  @SubscribeMessage('leaveRoom')
   handleRoomLeave(client: Socket, room: SalaDTO ) {
     console.log("handleRoomLeave:\n",room);
     client.leave(room.idCurso);
-    client.emit('abandonoSala', room);
+    client.emit('leftRoom', room);
   }
 
 }
