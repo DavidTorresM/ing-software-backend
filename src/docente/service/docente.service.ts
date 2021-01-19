@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {Admin, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { Docente } from '../docente.entity';
 import { DocenteDTO } from '../interface/docente.interface';
+import { CursoService } from 'src/curso/service/curso.service';
 
 const relacionesDocente: string[] = [
     'usuario',
@@ -17,7 +18,8 @@ const relacionesDocente: string[] = [
 @Injectable()
 export class DocenteService {
     constructor(
-        @InjectRepository(Docente) private repositorioDocente: Repository < Docente >
+        @InjectRepository(Docente) private repositorioDocente: Repository < Docente >,
+        private servicioCurso: CursoService,
     ){}
     async crear(docente: DocenteDTO): Promise< Docente >{
         const nuevoAdmin = this.repositorioDocente.create(docente);
@@ -31,5 +33,9 @@ export class DocenteService {
     async obtenerDocentees(): Promise< Docente[] >{
         const docentees = this.repositorioDocente.find({ relations: relacionesDocente });
         return docentees;
+    }
+
+    async obtenerIdCursos(id: string): Promise< string[] > {
+        return this.servicioCurso.obtenerIdCursosDocente(id); 
     }
 }

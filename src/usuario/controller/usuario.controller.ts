@@ -14,6 +14,7 @@ import { JwtAuthGuardAlumno } from '../../auth/guards/jwt-auth.alumno.guard';
 import { Usuario } from '../usuario.entity';
 import { UsuarioDTO } from '../interface/usuario.interface';
 import { UsuarioService } from '../service/usuario.service';
+import { Sala } from 'src/sala/sala.entity';
 
 @Controller('api/usuario')
 export class UsuarioController {
@@ -38,6 +39,13 @@ export class UsuarioController {
   @Get('buscar/email/:email')
   async obtenerUsuarioPorEmail(@Param('email') email: string): Promise< Usuario | null >{
     const respuesta = await this.servicioUsuario.obtenerUsuarioPorEmail(email);
+
+    return respuesta;
+  }
+
+  @Get('buscar/salas/:id')
+  async obtenerSalasPorId(@Param('id') id: string): Promise< Sala[] | null >{
+    const respuesta = await this.servicioUsuario.obtenerSalas(id);
 
     return respuesta;
   }
