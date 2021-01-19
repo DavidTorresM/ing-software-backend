@@ -27,7 +27,7 @@ export class Publicacion {
   @Column()
   idSala: number;
 
-  @Column()
+  @Column({ nullable: true })
   archivoUrl?: string;
 
   @ManyToOne(() => Sala, { nullable: false })

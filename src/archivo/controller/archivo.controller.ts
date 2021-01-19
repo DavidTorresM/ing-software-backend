@@ -15,7 +15,7 @@ export class ArchivoController {
 
 
   @UseGuards(JwtAuthGuardDocente)
-  @Get('crear')
+  @Post('crear')
   async crearArchivo(@Body() archivoDTO: ArchivoDTO) : Promise< Archivo > {
     const respuesta = await this.servicioArchivo.crear(archivoDTO);
 

@@ -5,6 +5,13 @@ import {Repository } from 'typeorm';
 import { Publicacion } from '../publicacion.entity';
 import { PublicacionDTO } from '../interface/publicacion.interface';
 
+
+const relacionesPublicacion: string[] = [
+	'sala',
+	'archivo',
+  ];
+  
+
 @Injectable()
 export class PublicacionService {
 	constructor(
@@ -36,4 +43,22 @@ export class PublicacionService {
 
 		return publicaciones;
 	}
+
+
+	async obtenerPublicacionPorCampo(nombre: string, valor: string): Promise< Publicacion[] | null> {
+		const campos = {
+		  [nombre]: valor,
+		};
+	   
+		const Publicacion = await this.repositorioPublicacion.find(
+		  {where:campos, relations: relacionesPublicacion }
+		);
+	
+		if (!Publicacion) {
+		  return null;
+		}
+	
+		return Publicacion;
+	  }
+
 }

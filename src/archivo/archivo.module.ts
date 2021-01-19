@@ -10,6 +10,7 @@ import { ArchivoController } from './controller/archivo.controller';
     TypeOrmModule.forFeature([Archivo]),
   ],
   providers: [ArchivoService],
-  controllers: [ArchivoController]
+  controllers: [ArchivoController],
+  exports:[ ArchivoService ]
 })
 export class ArchivoModule {}

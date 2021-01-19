@@ -18,9 +18,9 @@ export class AuthService {
         private adminService:   AdministradorService,
         private jwtService: JwtService) {}
     
-    async validateUser(username: string, pass: string): Promise< Usuario | null > {
-      const user = await this.usuarioService.obtenerUsuarioPorEmailPassword(username);
-      
+    async validateUser(email: string, pass: string): Promise< Usuario | null > {
+      const user = await this.usuarioService.obtenerUsuarioPorEmailPassword(email);
+      console.log(user,pass);
       if (user && user.contrasenia === encryptText(pass)) {
         return user;
       }

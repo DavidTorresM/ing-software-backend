@@ -1,4 +1,4 @@
-interface ArchivoDTO {
+export interface ArchivoDTO {
 	nombre: string;
 	tamanio: number;
 	tipo: string;
@@ -10,5 +10,6 @@ export interface PublicacionDTO{
 	descripcion: string;
 	fechaPublicacion: Date;
 	idSala: number;
-	archivo: ArchivoDTO;
+	archivoUrl?: string;
+	archivo?: ArchivoDTO;
 }
