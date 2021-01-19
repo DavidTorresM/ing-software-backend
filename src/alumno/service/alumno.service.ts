@@ -8,7 +8,7 @@ import { AlumnoDTO } from '../interface/alumno.interface';
 @Injectable()
 export class AlumnoService {
   constructor(
-    @InjectRepository(Alumno) private repositorioAlumno: Repository< Alumno >
+    @InjectRepository(Alumno) private repositorioAlumno: Repository< Alumno >,
   ) {}
 
   async crear(alumno: AlumnoDTO): Promise< Alumno > {
@@ -38,5 +38,18 @@ export class AlumnoService {
     }
 
     return alumno.getFormatResponse();
+  }
+
+  async obtenerIdCursos(id: string): Promise< string[] | null> {
+    const alumno = await this.repositorioAlumno.findOne(
+      { idUsuario: id },
+      { relations: [
+        'cursos'
+      ] }
+    );
+    
+    const idCursos = alumno.cursos.map(curso => curso.id);
+   
+    return idCursos;
   }
 }

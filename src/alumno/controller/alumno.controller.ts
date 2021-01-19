@@ -14,6 +14,7 @@ import { AlumnoService } from '../service/alumno.service';
 import { JwtAuthGuardAdministrador } from '../../auth/guards/jwt-aut.administrador.guard';
 import { JwtAuthGuardDocente } from '../../auth/guards/jwt-aut.docente.guard';
 import { JwtAuthGuardAlumno } from '../../auth/guards/jwt-auth.alumno.guard';
+import { Sala } from 'src/sala/sala.entity';
 
 
 @Controller('api/alumno')
@@ -33,6 +34,13 @@ export class AlumnoController {
   @Get('buscar/id/:id')
   async obtenerAlumnoPorId(@Param('id') id: string): Promise< Alumno | null >{
     const respuesta = await this.servicioAlumno.obtenerAlumnoPorId(id);
+
+    return respuesta;
+  }
+
+  @Get('buscar/salas/:id')
+  async obtenerSalasAlumnoPorId(@Param('id') id: string): Promise< string[] | null >{
+    const respuesta = await this.servicioAlumno.obtenerIdCursos(id);
 
     return respuesta;
   }

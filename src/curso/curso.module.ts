@@ -10,6 +10,7 @@ import { CursoController } from './controller/curso.controller';
     TypeOrmModule.forFeature([Curso]),
   ],
   providers: [CursoService],
-  controllers: [CursoController]
+  controllers: [CursoController],
+  exports: [CursoService]
 })
 export class CursoModule {}

@@ -59,4 +59,18 @@ export class SalaService {
     
     return salaes.map( sala => sala.getFormatResponse() );
   }
+
+  async obtenerSalasPorCursos(ids: string[]): Promise< Sala[] | null> {
+    const salas = [];
+
+    for (const id of ids) {
+      const salaInfo = await this.obtenerSalaPorCampo('idCurso', id);
+      
+      if (salaInfo) {
+        salas.push(salaInfo);
+      }
+    }
+    
+    return salas;
+  }
 }

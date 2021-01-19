@@ -5,6 +5,10 @@ import {Repository } from 'typeorm'
 import { encryptText } from '../../utils/string.util';
 import { Usuario } from '../usuario.entity';
 import { UsuarioDTO } from '../interface/usuario.interface';
+import { SalaService } from 'src/sala/service/sala.service';
+import { Sala } from 'src/sala/sala.entity';
+import { AlumnoService } from 'src/alumno/service/alumno.service';
+import { DocenteService } from 'src/docente/service/docente.service';
 
 const relacionesUsuario: string[] = [
   'direccion',
@@ -16,7 +20,10 @@ const relacionesUsuario: string[] = [
 @Injectable()
 export class UsuarioService {
   constructor(
-    @InjectRepository(Usuario) private repositorioUsuario: Repository< Usuario >
+    @InjectRepository(Usuario) private repositorioUsuario: Repository< Usuario >,
+    private servicioAlumno: AlumnoService,
+    private servicioSala: SalaService,
+    private servicioDocente: DocenteService,
   ) {}
 
   async crear(usuario: UsuarioDTO): Promise< Usuario > {
@@ -68,5 +75,22 @@ export class UsuarioService {
 
   async obtenerUsuarioPorEmail(email: string): Promise< Usuario | null > {
     return this.obtenerUsuarioPorCampo('email', email);
+  }
+
+  async obtenerSalas(id: string): Promise< Sala[] | null> {
+    const alumno = await this.servicioAlumno.obtenerAlumnoPorId(id);
+
+    let idCursos = [];
+
+    if (alumno) {
+      idCursos = await this.servicioAlumno.obtenerIdCursos(id);
+    }
+    else {
+      idCursos = await this.servicioDocente.obtenerIdCursos(id);
+    }
+    
+    const salas = await this.servicioSala.obtenerSalasPorCursos(idCursos);
+
+    return salas;
   }
 }

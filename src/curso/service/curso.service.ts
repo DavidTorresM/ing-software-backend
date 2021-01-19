@@ -36,4 +36,15 @@ export class CursoService {
 
         return this.repositorioCurso.save(nuevoCurso);
     }
+
+    async obtenerIdCursosDocente(idDocente: string) {
+        const cursos = await this.repositorioCurso.find({
+          idDocente,
+        });
+
+        const idCursos = cursos.map(curso => curso.id);
+        console.log(idCursos);
+
+        return idCursos;
+    }
 }
