@@ -10,8 +10,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 const s3 = new AWS.S3();
 AWS.config.update({
-  accessKeyId: 'AKIAJYK5ZVNOIX2B5FUQ',
-  secretAccessKey: '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',
+  accessKeyId: '',
+  secretAccessKey: '',
   region: 'us-east-2',
 });
 
